@@ -1,0 +1,89 @@
+{
+    "configurations": [
+        {
+            "name": "!!! WARNING !!! AUTO-GENERATED FILE, PLEASE DO NOT MODIFY IT AND USE https://docs.platformio.org/page/projectconf/section_env_build.html#build-flags"
+        },
+        {
+            "name": "Win32",
+            "includePath": [
+                "e:/data/SensorHead/include",
+                "e:/data/SensorHead/src",
+                "C:/Users/Marcus/.platformio/packages/framework-arduino-avr-attiny/libraries/SoftwareSerial",
+                "C:/Users/Marcus/.platformio/packages/framework-arduino-avr-attiny/libraries/EEPROM",
+                "C:/Users/Marcus/.platformio/packages/framework-arduino-avr-attiny/cores/tiny",
+                "C:/Users/Marcus/.platformio/packages/framework-arduino-avr-attiny/variants/tinyX5",
+                "C:/Users/Marcus/.platformio/lib/Adafruit ADXL343_ID6117",
+                "C:/Users/Marcus/.platformio/lib/Adafruit BusIO",
+                "C:/Users/Marcus/.platformio/lib/Adafruit Unified Sensor",
+                "C:/Users/Marcus/.platformio/lib/ArduinoJson/src",
+                "C:/Users/Marcus/.platformio/lib/DHT sensor library_ID19",
+                "C:/Users/Marcus/.platformio/lib/DHT_ID1671",
+                "C:/Users/Marcus/.platformio/lib/DallasTemperature_ID54",
+                "C:/Users/Marcus/.platformio/lib/ESP Async WebServer_ID306/src",
+                "C:/Users/Marcus/.platformio/lib/FOSSA-Comms/src",
+                "C:/Users/Marcus/.platformio/lib/LoRa_ID1167/src",
+                "C:/Users/Marcus/.platformio/lib/OneWire_ID1",
+                "C:/Users/Marcus/.platformio/lib/RadioLib/src",
+                "C:/Users/Marcus/.platformio/packages/framework-arduino-avr-attiny/libraries/ATTinyCore/src",
+                "C:/Users/Marcus/.platformio/packages/framework-arduino-avr-attiny/libraries/SPI",
+                "C:/Users/Marcus/.platformio/packages/framework-arduino-avr-attiny/libraries/Servo/src",
+                "C:/Users/Marcus/.platformio/packages/framework-arduino-avr-attiny/libraries/Servo_ATTinyCore/src",
+                "C:/Users/Marcus/.platformio/packages/framework-arduino-avr-attiny/libraries/Wire/src",
+                "C:/Users/Marcus/.platformio/packages/framework-arduino-avr-attiny/libraries/tinyNeoPixel",
+                "C:/Users/Marcus/.platformio/packages/framework-arduino-avr-attiny/libraries/tinyNeoPixel_Static",
+                "C:/Users/Marcus/.platformio/packages/tool-unity",
+                ""
+            ],
+            "browse": {
+                "limitSymbolsToIncludedHeaders": true,
+                "path": [
+                    "e:/data/SensorHead/include",
+                    "e:/data/SensorHead/src",
+                    "C:/Users/Marcus/.platformio/packages/framework-arduino-avr-attiny/libraries/SoftwareSerial",
+                    "C:/Users/Marcus/.platformio/packages/framework-arduino-avr-attiny/libraries/EEPROM",
+                    "C:/Users/Marcus/.platformio/packages/framework-arduino-avr-attiny/cores/tiny",
+                    "C:/Users/Marcus/.platformio/packages/framework-arduino-avr-attiny/variants/tinyX5",
+                    "C:/Users/Marcus/.platformio/lib/Adafruit ADXL343_ID6117",
+                    "C:/Users/Marcus/.platformio/lib/Adafruit BusIO",
+                    "C:/Users/Marcus/.platformio/lib/Adafruit Unified Sensor",
+                    "C:/Users/Marcus/.platformio/lib/ArduinoJson/src",
+                    "C:/Users/Marcus/.platformio/lib/DHT sensor library_ID19",
+                    "C:/Users/Marcus/.platformio/lib/DHT_ID1671",
+                    "C:/Users/Marcus/.platformio/lib/DallasTemperature_ID54",
+                    "C:/Users/Marcus/.platformio/lib/ESP Async WebServer_ID306/src",
+                    "C:/Users/Marcus/.platformio/lib/FOSSA-Comms/src",
+                    "C:/Users/Marcus/.platformio/lib/LoRa_ID1167/src",
+                    "C:/Users/Marcus/.platformio/lib/OneWire_ID1",
+                    "C:/Users/Marcus/.platformio/lib/RadioLib/src",
+                    "C:/Users/Marcus/.platformio/packages/framework-arduino-avr-attiny/libraries/ATTinyCore/src",
+                    "C:/Users/Marcus/.platformio/packages/framework-arduino-avr-attiny/libraries/SPI",
+                    "C:/Users/Marcus/.platformio/packages/framework-arduino-avr-attiny/libraries/Servo/src",
+                    "C:/Users/Marcus/.platformio/packages/framework-arduino-avr-attiny/libraries/Servo_ATTinyCore/src",
+                    "C:/Users/Marcus/.platformio/packages/framework-arduino-avr-attiny/libraries/Wire/src",
+                    "C:/Users/Marcus/.platformio/packages/framework-arduino-avr-attiny/libraries/tinyNeoPixel",
+                    "C:/Users/Marcus/.platformio/packages/framework-arduino-avr-attiny/libraries/tinyNeoPixel_Static",
+                    "C:/Users/Marcus/.platformio/packages/tool-unity",
+                    ""
+                ]
+            },
+            "defines": [
+                "PLATFORMIO=40304",
+                "ARDUINO_AVR_ATTINYX5",
+                "F_CPU=8000000L",
+                "ARDUINO_ARCH_AVR",
+                "ARDUINO=10808",
+                "__AVR_ATtiny85__",
+                ""
+            ],
+            "intelliSenseMode": "clang-x64",
+            "cStandard": "c11",
+            "cppStandard": "c++11",
+            "compilerPath": "C:/Users/Marcus/.platformio/packages/toolchain-atmelavr/bin/avr-gcc.exe",
+            "compilerArgs": [
+                "-mmcu=attiny85",
+                ""
+            ]
+        }
+    ],
+    "version": 4
+}
