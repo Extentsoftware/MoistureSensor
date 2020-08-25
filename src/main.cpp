@@ -36,12 +36,14 @@
 #include <avr/io.h>        // Adds useful constants
 #include <util/delay.h>    // Adds delay_ms and delay_us functions
 
-// Only use Serial if using ATTiny85
-// Serial output connections:
-#include <SoftwareSerial.h>
-#define rxPin 5    // We use a non-existant pin as we are not interested in receiving data
-#define txPin 3
-SoftwareSerial serial(rxPin, txPin);
+// initialize oneWireSlave object
+#include "OneWireSlave.h"
+OneWireSlave ow;
+
+// Device include file must have the functions void setup() and void loop()
+#include "DSE200.h"
+
+uint8_t id[8] = { FAM, SERIAL_NUMBER, 0x00 };
 
 #define INTERNAL2V56NC (6)
 
@@ -51,25 +53,11 @@ SoftwareSerial serial(rxPin, txPin);
 const int deviceType = 85;  // 45 = ATTiny45, NO serial output, 85 = AtTiny85, with serial output
 
 // LED output pins:
-const int redled = 0;         // Red LED attached to here (0, IC pin 5)
-const int buzzLedSw = 1;       // Green LED/buzzer/Switch attached to here (1, IC pin 6)
-
-// MOSFET Driver output
-const int FETdriver = 4;
 
 // Analog sensing pin
 const int VsensePin = A1;    // Reads in the analogue number of voltage
 long int VsenseValue = 0;   // Holds the voltage data
 unsigned long int Vint = 0;  //Holds the voltage as an int
-
-int voltageRange = 0;  // This stores the volatge range. This is 12V, 24V or 0v (error)
-const int Taverage = 10;  // This is the number of samples to average over (each sample is around 5ms)
-
-// PID CONTROL values
-int FETPWM = 0;      // This is the control for the PWM 
-int integral = 0;    // Holds the integral part
-int proportional = 0;// Holds the proportional part
-int error = 0;  // Holds the error term
 
 //Timing for serial output
 long int oldMillis = 0;  //This holds the previous millisecond count value
@@ -83,6 +71,11 @@ int calibrationFactor = 0;    // This holds the Vref value in millivolts
 
 // State machine control
 int stateControl = 0;  // This controls the state of the device
+
+const int redled = 0;
+const int grnled = 1;
+
+void onCommand(uint8_t cmd);
 
 // the setup routine runs once when you press reset:
 void setup()  { 
@@ -122,23 +115,6 @@ void setup()  {
     */
     GTCCR = 1<<PWM1B | 2<<COM1B0;
   
-  // Set up IO pins
-  pinMode(rxPin, INPUT);
-  pinMode(txPin, OUTPUT);  
-  pinMode(redled, OUTPUT);
-  pinMode(buzzLedSw, OUTPUT);        // First want to read the switch
-  pinMode(FETdriver, OUTPUT);
-  
-  digitalWrite(FETdriver, LOW);   //  Switch the FET OFF
-  
-  if(deviceType==85)
-  {
-    // Start the serial output string - Only for ATTiny85 Version
-    serial.begin(4800);
-    serial.println("TEST ATTiny85");
-    serial.println("13/11/13 Matt Little"); 
-  }
-
   analogReference(INTERNAL2V56NC);  // This sets the internal ref to be 2.56V (or close to this)
   delay(100);  // Wait a while for this to stabilise.
   
@@ -147,10 +123,9 @@ void setup()  {
   loByte = EEPROM.read(125); 
   
   calibrationFactor = (hiByte << 8)+loByte;  // Get the sensor calibrate value 
-  
-  serial.print("Calibration Factor: ");   // TESTING
-  serial.println(calibrationFactor);   // TESTING
-  
+
+  ow.begin(&onCommand, id);
+
 } 
 
 // the loop routine runs over and over again forever:
@@ -159,12 +134,23 @@ void loop()  {
     // RED LED ON  
     // set the output RED
     analogWrite(redled, 127);    // Set it to 50%  running at 31.2kHz  
-    analogWrite(buzzLedSw, 0); 
-    _delay_ms(500);
-    serial.println("This is a NEW TEST");
-    // GREEN LED ON  
-    // set the output GREEN
-    //analogWrite(redled, 0);    
-    analogWrite(buzzLedSw, 255);    
-    _delay_ms(500);
+    analogWrite(grnled, 127);    // Set it to 50%  running at 31.2kHz  
+
+    ow.write(&data[0], 15, &ow.reset);
+    ow.reset();
+    ow.read(&data[0], 1, &sendData);
+}
+
+void onCommand(uint8_t cmd) {
+  switch (cmd) {
+    case CMD_ReadPio: pio.read(); break;
+    case CMD_WritePio: pio.write(); break;
+    case CMD_Readbuffer: buffer.read(); break;
+    case CMD_Writebuffer: buffer.write();  break;
+    case CMD_Copybuffer: buffer.copy(); break;
+    case CMD_RecallMemory: ow.reset(); break;
+  }
+};
+
+void setup(uint8_t id[8]) {
 }
